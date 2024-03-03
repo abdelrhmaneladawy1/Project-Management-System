@@ -1,0 +1,31 @@
+.main-color {
+  color: rgba(239, 155, 40, 1) !important;
+}
+.bg {
+  background-color: rgba(239, 155, 40, 1) !important;
+}
+
+.pointer {
+  cursor: pointer;
+}
+/* Auth  */
+.auth-container {
+  background-image: url(./assets/Images/Login.png);
+  background-position: center;
+  background-size: cover;
+}
+.bg-overlay {
+  background-color: rgba(49, 89, 81, 0.9);
+}
+
+.header-title {
+  position: relative;
+}
+.header-title::before {
+  content: "";
+  position: absolute;
+  background-color: rgba(239, 155, 40, 1);
+  height: 4px;
+  width: 10px;
+  bottom: -5px;
+}
