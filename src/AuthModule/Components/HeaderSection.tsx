@@ -1,4 +1,5 @@
-export default function HeaderSection({ title }) {
+export default function HeaderSection({ title }: { title: string }) {
+  console.log(title);
   return (
     <div>
       <h6 className="text-white">Welcome to PMS</h6>

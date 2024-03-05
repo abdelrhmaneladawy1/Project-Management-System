@@ -1,28 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { jwtDecode } from "jwt-decode";
+import { saveAuthData } from "../../../Api/Auth/Auth";
 import baseUrl from "../../../Custom/Custom";
 
 interface LoginState {
-  role: null;
+  role: string;
   data: [];
   loading: boolean;
 }
 const initialState: LoginState = {
-  role: null,
+  role: "",
   data: [],
   loading: false,
 };
-const saveAuthData = () => {
-  if (localStorage.getItem("AuthToken")) {
-    const encodedToken = localStorage.getItem("AuthToken");
-    const decodedToken = jwtDecode(encodedToken);
-    const role = decodedToken.roles[0];
-    localStorage.setItem("role", role);
-  }
-};
 
-const fetchData = createAsyncThunk("login/fetchData", async (userData) => {
+const fetchData: any = createAsyncThunk("login/fetchData", async (userData) => {
   const response = await baseUrl
     .post(`/api/v1/Users/Login`, userData)
     .then((res) => {
@@ -41,12 +33,12 @@ const loginSlice = createSlice({
     builder.addCase(fetchData.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(fetchData.fulfilled, (state, action) => {
+    builder.addCase(fetchData.fulfilled, (state: any, action) => {
       state.role = action.payload;
       state.loading = false;
       saveAuthData();
     });
-    builder.addCase(fetchData.rejected, (state, action) => {
+    builder.addCase(fetchData.rejected, (state) => {
       state.loading = false;
     });
   },
