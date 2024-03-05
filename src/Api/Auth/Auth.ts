@@ -1,7 +1,7 @@
-import { jwtDecode } from "jwt-decode";
-import baseUrl from "../../Custom/Custom";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
+import baseUrl from "../../Custom/Custom";
 
 export const saveAuthData = () => {
   if (localStorage.getItem("AuthToken")) {
