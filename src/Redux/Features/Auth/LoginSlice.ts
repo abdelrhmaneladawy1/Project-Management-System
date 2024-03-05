@@ -1,48 +1,31 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
-import { saveAuthData } from "../../../Api/Auth/Auth";
-import baseUrl from "../../../Custom/Custom";
+import { createSlice } from "@reduxjs/toolkit";
+import { fetchDataLogin, saveAuthData } from "../../../Api/Auth/Auth";
+import { IState } from "../../../Interfaces/Auth/Auth";
 
-interface LoginState {
-  role: string;
-  data: [];
-  loading: boolean;
-}
-const initialState: LoginState = {
+const initialState: IState = {
   role: "",
   data: [],
   loading: false,
 };
-
-const fetchData: any = createAsyncThunk("login/fetchData", async (userData) => {
-  const response = await baseUrl
-    .post(`/api/v1/Users/Login`, userData)
-    .then((res) => {
-      toast.success("successfully loggedIn");
-      localStorage.setItem("AuthToken", res.data.token);
-    })
-    .catch((err) => toast.error(err.response.data.message));
-  return response;
-});
 
 const loginSlice = createSlice({
   name: "login",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchData.pending, (state) => {
+    builder.addCase(fetchDataLogin.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(fetchData.fulfilled, (state: any, action) => {
+    builder.addCase(fetchDataLogin.fulfilled, (state, action) => {
       state.role = action.payload;
       state.loading = false;
       saveAuthData();
     });
-    builder.addCase(fetchData.rejected, (state) => {
+    builder.addCase(fetchDataLogin.rejected, (state) => {
       state.loading = false;
     });
   },
 });
 
-export { fetchData, saveAuthData };
+export { saveAuthData };
 export default loginSlice.reducer;

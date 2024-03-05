@@ -2,9 +2,9 @@ import { Form } from "react-bootstrap";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { fetchData } from "../../Redux/Features/Auth/LoginSlice";
 import HeaderSection from "../Components/HeaderSection";
 import { ILoginInputs } from "../../Interfaces/Auth/Auth";
+import { fetchDataLogin } from "../../Api/Auth/Auth";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -15,9 +15,7 @@ export default function Login() {
     formState: { errors },
   } = useForm<ILoginInputs>();
   const onSubmit: SubmitHandler<ILoginInputs> = (data) => {
-    dispatch(fetchData(data)).then(() => {
-      navigate("/dashboard");
-    });
+    dispatch(fetchDataLogin({ data, navigate }));
   };
 
   return (
