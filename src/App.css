@@ -40,3 +40,20 @@
   margin: auto;
   border-radius: 50%;
 }
+/* Sidebar  */
+.sidebar-container {
+  background-color: #0e382f;
+  border-radius: 0px 58px 0px 0px;
+}
+.sidebar-container .ps-sidebar-container {
+  background-color: #0e382f;
+  height: 100vh;
+  color: #fff;
+}
+.ps-sidebar-root {
+  border: none !important;
+}
+
+.sidebar-container .ps-sidebar-container .ps-menu-button:hover {
+  background-color: #0092471a;
+}

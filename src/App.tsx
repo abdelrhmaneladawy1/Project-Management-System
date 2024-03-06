@@ -7,6 +7,8 @@ import { AuthLayout, MasterLayout, NotFound } from "./SharedModule";
 import ProtectedRoute from "./SharedModule/Components/ProtecteRoute/ProtectedRoute";
 import Register from "./AuthModule/Pages/Register";
 import VerifyUser from "./AuthModule/Pages/VerifyUser";
+import UsersPage from "./UsersModule/Pages/UsersPage";
+import TasksPage from "./TasksModule/Pages/TasksPage";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +35,9 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <DashboardPage /> },
       { path: "dashboard", element: <DashboardPage /> },
+      { path: "users", element: <UsersPage /> },
       { path: "projects", element: <ProjectsPage /> },
+      { path: "tasks", element: <TasksPage /> },
     ],
   },
 ]);
