@@ -13,3 +13,17 @@ export interface IResetPassword {
   confirmPassword: "string";
   seed: "string";
 }
+
+export interface IRegisterInputs {
+  userName: "string";
+  email: "string";
+  country: "string";
+  phoneNumber: "string";
+  profileImage: number;
+  password: "string";
+  confirmPassword: "string";
+}
+export interface IVerifyInputs {
+  email: "string";
+  code: "string";
+}

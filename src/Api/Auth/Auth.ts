@@ -17,8 +17,10 @@ export const fetchDataLogin = createAsyncThunk(
     const response = await baseUrl
       .post(`/api/v1/Users/Login`, data)
       .then((res) => {
+        console.log(res);
         toast.success("successfully loggedIn");
         navigate("/dashboard");
+        saveAuthData();
         localStorage.setItem("AuthToken", res.data.token);
       })
       .catch((err) => toast.error(err.response.data.message));
@@ -44,6 +46,32 @@ export const fetchResetPassword = createAsyncThunk(
   async ({ data, navigate }) => {
     const response = await baseUrl
       .post(`/api/v1/Users/Reset`, data)
+      .then((res) => {
+        toast.success(res.data.message);
+        navigate("/login");
+      })
+      .catch((err) => toast.error(err.response.data.message));
+    return response;
+  }
+);
+export const fetchRegister = createAsyncThunk(
+  "Register/fetchRegister",
+  async ({ addFormData, navigate }) => {
+    const response = await baseUrl
+      .post(`/api/v1/Users/Register`, addFormData)
+      .then((res) => {
+        toast.success(res.data.message);
+        navigate("/verify-user");
+      })
+      .catch((err) => toast.error(err.response.data.message));
+    return response;
+  }
+);
+export const fetchVerify = createAsyncThunk(
+  "Register/fetchRegister",
+  async ({ data, navigate }) => {
+    const response = await baseUrl
+      .put(`/api/v1/Users/verify`, data)
       .then((res) => {
         toast.success(res.data.message);
         navigate("/login");

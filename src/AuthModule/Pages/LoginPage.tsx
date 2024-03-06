@@ -51,7 +51,7 @@ export default function Login() {
         </div>
         <div className="my-3 d-flex justify-content-between main-color ">
           <span className="pointer">
-            <Link className="main-color " to="">
+            <Link className="main-color " to="/register">
               Register Now ?
             </Link>
           </span>
