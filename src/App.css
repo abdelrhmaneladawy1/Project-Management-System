@@ -32,13 +32,11 @@
 
 /* Register */
 .uploadContainer {
-  background-color: #f0ffef;
-  background-image: url(assets/Images/img-icon.png);
-  background-size: cover;
-  width: 70px;
-  height: 70px;
+  width: 100px;
+  height: 100px;
   margin: auto;
   border-radius: 50%;
+  opacity: 0.7;
 }
 /* Sidebar  */
 .sidebar-container {

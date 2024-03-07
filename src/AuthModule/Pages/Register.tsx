@@ -5,10 +5,17 @@ import { useNavigate } from "react-router-dom";
 import { fetchRegister } from "../../Api/Auth/Auth";
 import HeaderSection from "../Components/HeaderSection";
 import { IRegisterInputs } from "../../Interfaces/Auth/Auth";
-
+import { useState } from "react";
+import RegisterPhoto from "../../assets/Images/img-icon.png";
 export default function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const catchSelectedImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event?.target?.files?.[0];
+
+    if (file) setSelectedImage(URL.createObjectURL(file));
+  };
   const {
     register,
     handleSubmit,
@@ -30,21 +37,28 @@ export default function Register() {
     <>
       <HeaderSection title="Create New Account" />
       <form className="mt-4" onSubmit={handleSubmit(onSubmit)}>
-        <div className="form-group text-center my-3 uploadContainer ">
+        <div className=" form-group text-center my-3 uploadContainer ">
           <input
+            className="form-lable d-none"
+            {...register("profileImage", {})}
             type="file"
-            className="form-control form-control-lg d-none"
-            {...register("profileImage")}
-            id="file-input"
+            id="imageInput"
+            onChange={catchSelectedImage}
+            placeholder="add Image"
           />
-          <label
-            htmlFor="file-input"
-            className="btn cursor-pointer w-100 h-100"
-          ></label>
+          <label htmlFor="imageInput" className="btn cursor-pointer w-100 ">
+            <img
+              className="rounded-circle"
+              src={selectedImage ? selectedImage : RegisterPhoto}
+              alt="Preview Image"
+              width="100%"
+              height="100%"
+            />
+          </label>
         </div>
 
-        <div className="my-3 d-flex gap-3 justify-content-between">
-          <div className="col-md-6">
+        <div className="  d-flex row  w-100">
+          <div className="col-md-6 my-2 ">
             <Form.Control
               {...register("userName", {
                 required: true,
@@ -57,7 +71,7 @@ export default function Register() {
               <span className="text-danger my-2">Name is required</span>
             )}
           </div>
-          <div className="col-md-6">
+          <div className="col-md-6 my-2">
             <Form.Control
               {...register("email", {
                 required: true,
@@ -72,8 +86,8 @@ export default function Register() {
             )}
           </div>
         </div>
-        <div className="my-3 d-flex gap-3 justify-content-between">
-          <div className="col-md-6">
+        <div className=" d-flex row w-100">
+          <div className="col-md-6 my-2">
             <Form.Control
               {...register("country", {
                 required: true,
@@ -86,7 +100,7 @@ export default function Register() {
               <span className="text-danger my-2">Country is required</span>
             )}
           </div>
-          <div className="col-md-6">
+          <div className="col-md-6 my-2">
             <Form.Control
               {...register("phoneNumber", {
                 required: true,
@@ -100,8 +114,8 @@ export default function Register() {
             )}
           </div>
         </div>
-        <div className="my-3 d-flex gap-3 justify-content-between">
-          <div className="col-md-6">
+        <div className=" d-flex row w-100">
+          <div className="col-md-6 my-2">
             <Form.Control
               {...register("password", {
                 required: true,
@@ -114,7 +128,7 @@ export default function Register() {
               <span className="text-danger my-2">Password is required</span>
             )}
           </div>
-          <div className="col-md-6">
+          <div className="col-md-6 my-2">
             <Form.Control
               {...register("confirmPassword", {
                 required: true,
@@ -132,12 +146,12 @@ export default function Register() {
           </div>
         </div>
 
-        <div className="">
+        <div className="my-2">
           <button
             type="submit"
             className="btn text-white bg w-50 d-block m-auto "
           >
-            Create New Account
+            Create Account
           </button>
         </div>
       </form>

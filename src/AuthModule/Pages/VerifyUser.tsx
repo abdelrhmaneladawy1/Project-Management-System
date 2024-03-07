@@ -51,7 +51,7 @@ export default function VerifyUser() {
 
         <div className="">
           <button type="submit" className="btn text-white bg w-100 ">
-            Save
+            Verify Account
           </button>
         </div>
       </form>

@@ -8,9 +8,8 @@ import { LuUsers2 } from "react-icons/lu";
 import { GrProjects } from "react-icons/gr";
 import { FaTasks } from "react-icons/fa";
 export default function SideBar() {
-  let [isCollapsed, setIsCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const { t, i18n } = useTranslation();
-
   const navigate = useNavigate();
   const handleLogout = () => {
     localStorage.removeItem("AuthToken");
@@ -20,8 +19,6 @@ export default function SideBar() {
   const handleToggle = () => {
     setIsCollapsed(!isCollapsed);
   };
-  // Modal handler
-  const handleShow = () => setShow(true);
   return (
     <>
       <div className="sidebar-container   ">
