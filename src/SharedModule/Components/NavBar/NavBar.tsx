@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import userImg from "../../../assets/Images/AuthLogo.svg";
 export default function NavBar() {
   const { t, i18n } = useTranslation();
+
   return (
     <>
       <Navbar expand="lg" className="bg-body-tertiary rounded-3">
