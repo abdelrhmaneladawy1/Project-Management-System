@@ -15,7 +15,6 @@ export default function SidebarEmployee({ handleToggle, logo, handleLogout }) {
           icon={<i className="fa fa-home"></i>}
           component={<Link to="/dashboard" />}
         >
-          {" "}
           {t("home")}
         </MenuItem>
         <MenuItem
