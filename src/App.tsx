@@ -9,6 +9,8 @@ import Register from "./AuthModule/Pages/Register";
 import VerifyUser from "./AuthModule/Pages/VerifyUser";
 import UsersPage from "./UsersModule/Pages/UsersPage";
 import TasksPage from "./TasksModule/Pages/TasksPage";
+import AddProject from "./ProjectsModule/Components/AddProject";
+import EditProject from "./ProjectsModule/Components/EditProject";
 
 const router = createBrowserRouter([
   {
@@ -36,7 +38,18 @@ const router = createBrowserRouter([
       { index: true, element: <DashboardPage /> },
       { path: "dashboard", element: <DashboardPage /> },
       { path: "users", element: <UsersPage /> },
-      { path: "projects", element: <ProjectsPage /> },
+      {
+        path: "projects",
+        element: <ProjectsPage />,
+      },
+      {
+        path: "add-project",
+        element: <AddProject />,
+      },
+      {
+        path: "edit-project/:id/:title/:description",
+        element: <EditProject />,
+      },
       { path: "tasks", element: <TasksPage /> },
     ],
   },
