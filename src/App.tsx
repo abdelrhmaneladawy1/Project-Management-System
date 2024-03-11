@@ -11,6 +11,7 @@ import UsersPage from "./UsersModule/Pages/UsersPage";
 import TasksPage from "./TasksModule/Pages/TasksPage";
 import AddProject from "./ProjectsModule/Components/AddProject";
 import EditProject from "./ProjectsModule/Components/EditProject";
+import AddTask from "./TasksModule/Components/AddTask";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,7 @@ const router = createBrowserRouter([
         element: <EditProject />,
       },
       { path: "tasks", element: <TasksPage /> },
+      { path: "add-task", element: <AddTask /> },
     ],
   },
 ]);

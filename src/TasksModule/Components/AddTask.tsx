@@ -1,31 +1,32 @@
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { addProject } from "../../Api/Projects/Projects";
-import SubHeader from "../../SharedModule/Components/SubHeader/SubHeader";
+import { addTask } from "../../Api/Tasks/Tasks";
+import { useEffect } from "react";
+import { getProjects } from "../../Api/Projects/Projects";
 
-export default function AddProject() {
+export default function AddTask() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { projectsData } = useSelector((state) => state.projectsReducer);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = (data: any) => {
-    dispatch(addProject(data)).then(() => {
-      toast.success("Project added successfully");
-      navigate("/dashboard/projects");
+    dispatch(addTask(data)).then(() => {
+      toast.success("Task added successfully");
+      navigate("/dashboard/tasks");
     });
   };
+  useEffect(() => {
+    dispatch(getProjects({}));
+  }, [dispatch]);
   return (
     <>
-      <SubHeader
-        title="Add a New Project"
-        subTitle="View All Projects"
-        subTitleLink="/dashboard/projects"
-      />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="d-flex justify-content-center"
@@ -49,12 +50,26 @@ export default function AddProject() {
           {errors.title && (
             <span className="text-danger ">Description Is Required</span>
           )}
-
+          <div className="d-flex my-3 justify-content-between">
+            <div className="col-md-5">
+              {projectsData?.data?.map((item) => (
+                <select className="form-control " key={item.id}>
+                  <option>Select</option>
+                  <option value={item.id}>{item.title}</option>
+                </select>
+              ))}
+            </div>
+            <div className="col-md-5">
+              <select className="form-control ">
+                <option>Default select</option>
+              </select>
+            </div>
+          </div>
           <div className=" d-flex justify-content-between">
             <button
               className="btn border-1 border-black "
               onClick={() => {
-                navigate("/dashboard/projects");
+                navigate("/dashboard/tasks");
               }}
             >
               Cancel
