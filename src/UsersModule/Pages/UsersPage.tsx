@@ -10,10 +10,11 @@ export default function UsersPage() {
   const [onPress, setonPress] = useState(null);
   const [filterName, setFilterName] = useState("");
   const [filterEmail, setFilterEmail] = useState("");
+  const [pageSize, setUserSize] = useState(4);
   const { usersData } = useSelector((state) => state.usersReducer);
   const totalNumberOfPages = usersData?.totalNumberOfPages;
   useEffect(() => {
-    dispatch(getUsers({ onPress, filterName, filterEmail }));
+    dispatch(getUsers({ onPress, filterName, filterEmail, pageSize }));
   }, [dispatch, filterEmail, filterName, onPress]);
 
   return (

@@ -1,21 +1,21 @@
-import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { addTask } from "../../Api/Tasks/Tasks";
 import { useEffect, useState } from "react";
-import { getProjects } from "../../Api/Projects/Projects";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { getUsers } from "../../Api/Users/Users";
+import { getProjects } from "../../Api/Projects/Projects";
 import Select from "react-select";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { updateTask } from "../../Api/Tasks/Tasks";
 
-export default function AddTask() {
+export default function EditTask() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { projectsData } = useSelector((state) => state.projectsReducer);
   const { usersData } = useSelector((state) => state.usersReducer);
   const [pageSize, setUserSize] = useState(250);
-
-  console.log(usersData);
+  const { title, description, project } = useParams();
+  console.log(project);
 
   const {
     register,
@@ -24,8 +24,7 @@ export default function AddTask() {
     setValue,
   } = useForm();
   const onSubmit = (data: any) => {
-    console.log(data);
-    dispatch(addTask(data)).then(() => {
+    dispatch(updateTask(data)).then(() => {
       toast.success("Task added successfully");
       navigate("/dashboard/tasks");
     });
@@ -37,11 +36,13 @@ export default function AddTask() {
   const handleUserChange = (user) => {
     setValue("employeeId", user.value);
   };
+
   useEffect(() => {
+    setValue("title", title);
+    setValue("description", description);
     dispatch(getProjects({}));
     dispatch(getUsers({ pageSize }));
-  }, [dispatch, pageSize]);
-
+  }, [description, dispatch, pageSize, setValue, title]);
   return (
     <>
       <form
@@ -75,7 +76,9 @@ export default function AddTask() {
               >
                 <option>Select</option>
                 {projectsData?.data?.map((item) => (
-                  <option value={item.id}>{item.title}</option>
+                  <option key={item.id} value={item.id}>
+                    {item.title}
+                  </option>
                 ))}
               </select>
               {errors.projectId && (

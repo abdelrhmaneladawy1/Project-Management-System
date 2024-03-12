@@ -5,7 +5,7 @@ import baseUrl from "../../Custom/Custom";
 // Get all Users
 export const getUsers = createAsyncThunk(
   "GetAllUsers/getUsers",
-  async ({ onPress, filterName, filterEmail }: any, thunkAPI) => {
+  async ({ onPress, filterName, filterEmail, pageSize }: any, thunkAPI) => {
     console.log(filterEmail);
     const { rejectWithValue } = thunkAPI;
     try {
@@ -14,7 +14,7 @@ export const getUsers = createAsyncThunk(
           Authorization: `Bearer ${localStorage.getItem("AuthToken")}`,
         },
         params: {
-          pageSize: 4,
+          pageSize: pageSize,
           userName: filterName,
           email: filterEmail,
           pageNumber: onPress,

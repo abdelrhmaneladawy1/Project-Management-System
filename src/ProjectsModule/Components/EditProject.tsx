@@ -24,7 +24,6 @@ export default function EditProject() {
       navigate("/dashboard/projects");
     });
   };
-
   useEffect(() => {
     setValue("title", title);
     setValue("description", description);

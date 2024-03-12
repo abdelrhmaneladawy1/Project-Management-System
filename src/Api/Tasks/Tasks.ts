@@ -38,3 +38,36 @@ export const addTask = createAsyncThunk("addTasks/addTask", async (data) => {
     toast.error(error);
   }
 });
+// Update Tasks
+export const updateTask = createAsyncThunk(
+  "updateTasks/updateTask",
+  async ({ data, id }: any) => {
+    try {
+      const fetchData = await baseUrl.put(`/api/v1/Task/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("AuthToken")}`,
+        },
+      });
+      return fetchData;
+    } catch (error: any) {
+      toast.error(error);
+    }
+  }
+);
+
+// Delete Task
+export const deleteTask = createAsyncThunk(
+  "deleteTasks/deleteTask",
+  async (id) => {
+    try {
+      const fetchData = await baseUrl.delete(`/api/v1/Task/${id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("AuthToken")}`,
+        },
+      });
+      return fetchData;
+    } catch (error: any) {
+      toast.error(error);
+    }
+  }
+);

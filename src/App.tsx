@@ -12,6 +12,7 @@ import TasksPage from "./TasksModule/Pages/TasksPage";
 import AddProject from "./ProjectsModule/Components/AddProject";
 import EditProject from "./ProjectsModule/Components/EditProject";
 import AddTask from "./TasksModule/Components/AddTask";
+import EditTask from "./TasksModule/Components/EditTask";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       },
       { path: "tasks", element: <TasksPage /> },
       { path: "add-task", element: <AddTask /> },
+      {
+        path: "edit-task/:id/:title/:description/:user/:project",
+        element: <EditTask />,
+      },
     ],
   },
 ]);
